@@ -226,8 +226,9 @@ class PlaylistLoadSavePlugin(GObject.Object, Peas.Activatable):
             while Gtk.events_pending():
                 Gtk.main_iteration()
 
-            # Only for static playlists (omit automatic ones)
-            if isinstance(playlist, RB.StaticPlaylistSource):
+            # Export all playlists.
+            # TODO: Make option for exporting auto playlists.
+            if isinstance(playlist, RB.StaticPlaylistSource) or (playlist, RB.AutoPlaylistSource):
                 pl_name = playlist.props.name
                 playlist_path = os.path.join(ie_folder, pl_name) + ".m3u"
                 tmp_path = os.path.join(ie_folder, "tmp.m3u")
